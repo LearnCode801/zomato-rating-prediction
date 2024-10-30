@@ -7,7 +7,7 @@
 This project aims to build and deploy a machine learning model to predict restaurant ratings based on various features in the Zomato dataset. By conducting Exploratory Data Analysis (EDA) and building an effective predictive model, the project enables Zomato restaurants to estimate their ratings. The model is deployed via Flask, allowing live predictions through a web application.
 
 ![Project Overview Diagram](https://github.com/LearnCode801/zomato-rating-prediction/blob/main/img.png)  
-*Add a suitable image that illustrates the project workflow, model pipeline, or sample web app interface.*
+*Web App Image.*
 
 ## Main Objectives
 
@@ -65,5 +65,3 @@ To prevent library dependency conflicts, it’s recommended to create a virtual 
    - Use the web interface to input restaurant details and receive predicted ratings.
 
 --- 
-
-Replace `path/to/your/image.png` with the actual path to the image file you want to include.
