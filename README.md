@@ -1,67 +1,125 @@
+# Zomato Restaurant Rating Prediction (Bangalore)
+
+This project focuses on **analyzing restaurant data from Bangalore**, performing **Exploratory Data Analysis (EDA)**, building a **Machine Learning model**, and **deploying it using Flask** to predict restaurant ratings.
 ---
-
-# End-To-End Deployment of Zomato Restaurant Ratings Prediction
-
-## Project Overview
-
-This project aims to build and deploy a machine learning model to predict restaurant ratings based on various features in the Zomato dataset. By conducting Exploratory Data Analysis (EDA) and building an effective predictive model, the project enables Zomato restaurants to estimate their ratings. The model is deployed via Flask, allowing live predictions through a web application.
-
 ![Project Overview Diagram](https://github.com/LearnCode801/zomato-rating-prediction/blob/main/img.png)  
 *Web App Image.*
 
-## Main Objectives
+## 📌 Project Objective
 
-1. Conduct extensive Exploratory Data Analysis (EDA) on the Zomato dataset.
-2. Build a machine learning model that predicts restaurant ratings based on specific features.
-3. Deploy the model using Flask for live predictions of restaurant ratings.
+* Analyze the Zomato dataset to identify factors that influence restaurant ratings.
+* Build a regression model to predict ratings using features like cost, location, and cuisine.
+* Deploy the trained model using Flask to make live predictions.
 
-## Project Steps
+---
 
-### A. EDA and Model Building
-1. Load the dataset and perform necessary EDA in Jupyter Notebook or Google Colab.
-2. Develop a machine learning algorithm to predict restaurant ratings.
-3. Save the trained model using `pickle` for later use.
+## 🧾 Dataset Description
 
-### B. Deployment
-1. Use an IDE of your choice, such as PyCharm or Sublime Text, for deploying the model.
-2. Set up the development environment by installing [PyCharm](https://www.jetbrains.com/pycharm/download/) or another preferred IDE.
+* **Source**: Zomato, scraped from Kaggle
+* **City**: Bangalore
+* **Records**: \~51,000
+* **Features**:
 
-#### Virtual Environment Setup (Optional but Recommended)
-To prevent library dependency conflicts, it’s recommended to create a virtual environment. Use the following resources for guidance:
-- [Creating Virtual Environments](https://bit.ly/2CwnTfo)
-- [Virtual Environment Setup in PyCharm](https://bit.ly/32pe8uL)
+  * `name`: Restaurant name
+  * `location`: Neighborhood
+  * `online_order`: Online delivery available
+  * `book_table`: Table booking available
+  * `rate`: Customer rating (target)
+  * `votes`: Number of votes
+  * `cuisines`, `cost`, `dish_liked`, etc.
 
-3. Install Flask:
-   ```bash
-   pip install flask
-   ```
+---
 
-4. File Structure:
-   - **Model.py**: Code for training and saving the prediction model.
-   - **Data.csv**: Cleaned dataset for analysis and model training.
-   - **Template Folder**: Contains the HTML and CSS files for the web application interface.
-   - **App.py**: Flask API to receive restaurant details and return predicted ratings.
+## 🔍 Exploratory Data Analysis (EDA)
 
-## Project Files and Descriptions
+The following steps were done during EDA:
 
-- **Model.py**: Contains code for building and saving the model to predict restaurant ratings.
-- **Data.csv**: Pre-processed dataset saved for model training.
-- **Template Folder**: Holds HTML and CSS files for the web application's front end.
-- **App.py**: Flask API file that handles incoming data, processes it through the model, and returns the predicted rating.
+* Cleaned missing and inconsistent data
+* Converted rating and cost to numeric types
+* Removed "NEW" and "nan" ratings
+* Identified:
 
-## Setting Up Your Project
+  * Most common cuisines
+  * Most liked dishes (e.g., Pasta, Pizza)
+  * Distribution of ratings (3.5–4.5 is most common)
+  * Popular service types: Delivery, Dine-out
 
-1. **Create the required project files**:
-   - **app.py**: Main application file to handle API requests.
-   - **Template Folder**: Create a `templates` directory to hold HTML files.
-   - **Static Folder**: Create a `static` directory for CSS files.
+---
 
-2. **Adding Project Files**:
-   - In `templates` directory, add your HTML file for the web app.
-   - In `static` directory, add the CSS file to style the application.
+## 🤖 Machine Learning Models
 
-3. **Running the Project**:
-   - Run `app.py` to start the Flask server.
-   - Use the web interface to input restaurant details and receive predicted ratings.
+After preprocessing (label encoding, null handling, numeric conversion), three models were trained:
 
---- 
+| Model                     | R² Score   |
+| ------------------------- | ---------- |
+| Linear Regression         | 0.22       |
+| Random Forest             | 0.88       |
+| **Extra Trees Regressor** | **0.93** ✅ |
+
+➡️ **Extra Trees Regressor** was selected as the best model.
+
+---
+
+## 💾 Model Saving (Pickle)
+
+The model is saved using `pickle`:
+
+```python
+import pickle
+
+pickle.dump(model, open('model.pkl', 'wb'))
+model = pickle.load(open('model.pkl', 'rb'))
+```
+
+---
+
+## 🚀 Flask Deployment
+
+A minimal Flask app allows live predictions:
+
+```bash
+# To run the app locally
+cd app/
+python app.py
+```
+
+* User enters inputs like online order, location, cuisine, etc.
+* App returns the **predicted rating** for a restaurant.
+
+---
+
+## 📈 Sample Prediction Flow
+
+1. User selects:
+
+   * Online order: Yes
+   * Cuisine: Indian
+   * Cost: 600
+   * Location: Koramangala
+2. Model processes the input features
+3. Outputs predicted rating: `4.1`
+
+---
+
+## 📽️ Demo & Resources
+
+* 📹 [Video Walkthrough](https://lnkd.in/p/dTykrzdh)
+
+---
+
+## ✅ Future Enhancements
+
+* Use advanced NLP to analyze review texts
+* Build location-based restaurant recommendation system
+* Host app on **Heroku** or **AWS**
+
+---
+
+## 👨‍💻 Tech Stack
+
+* Python (Pandas, NumPy, Seaborn, Scikit-learn)
+* Jupyter Notebook
+* Flask (for deployment)
+* Plotly (for interactive graphs)
+
+---
