@@ -107,14 +107,6 @@ python app.py
 
 ---
 
-## ✅ Future Enhancements
-
-* Use advanced NLP to analyze review texts
-* Build location-based restaurant recommendation system
-* Host app on **Heroku** or **AWS**
-
----
-
 ## 👨‍💻 Tech Stack
 
 * Python (Pandas, NumPy, Seaborn, Scikit-learn)
